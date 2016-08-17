@@ -1,0 +1,26 @@
+{
+  "name": "d3negativestackbarchart",
+  "version": "0.0.1",
+  "description": "NPM packaging of http://bl.ocks.org/milroc/2991587",
+  "main": "index.js",
+  "dependencies": {
+    "d3": "~3.5.17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/russgray/d3-stacked-bar-chart.git"
+  },
+  "keywords": [
+    "d3",
+    "barchart"
+  ],
+  "author": "Russ Gray <russgray@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/russgray/d3-stacked-bar-chart/issues"
+  },
+  "homepage": "https://github.com/russgray/d3-stacked-bar-chart#readme"
+}

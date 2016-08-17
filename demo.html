@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<title>barStack</title>
+<style>
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path {
+  fill: none;
+  stroke: #FFF;
+  stroke-width:4;
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  display: none;
+}
+</style>
+</head>
+<body>
+<div class=".bar"></div>
+<script src="index.js"></script>
+
+<script type="text/javascript">
+    /* Here is an example */
+    var data = [[{x:1,y:3},{x:2,y:6},{x:3,y:-3}],
+                [{x:1,y:4},{x:2,y:-2},{x:3,y:-9}],
+                [{x:1,y:10},{x:2,y:-3},{x:3,y:4}]];
+
+    BarChart(".bar", data);
+
+</script>
+</body>
+</html>
