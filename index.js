@@ -2,19 +2,23 @@ var d3 = require('d3');
 
 function BarChart(id, data, options) {
     var cfg = {
-        w: 500,                         //Width of the circle
-        h: 500,                         //Height of the circle
-        margin: 20,                     //The margins of the SVG
+        w: 500,                         //Width
+        h: 500,                         //Height
+        margin: 20,                     //Margins of the SVG
         color: d3.scale.category10(),   //Color function
         labels: d3.range(data[0].length),
+        tickFilter: function (d, i) {   //Which labels to include
+            return true;
+        },
+        tickFormat: null,               //Label format
         tooltips: false                 //Show tooltips
     };
 
     // Put all of the options into a variable called cfg
     if ('undefined' !== typeof options) {
         for (var i in options) {
-            if('undefined' !== typeof options[i]) { 
-                cfg[i] = options[i]; 
+            if('undefined' !== typeof options[i]) {
+                cfg[i] = options[i];
             }
         }
     }
@@ -39,8 +43,8 @@ function BarChart(id, data, options) {
         seriesData.extent = d3.extent(
             d3.merge(
                 d3.merge(
-                    seriesData.map(function(e) { 
-                        return e.map(function(f) { 
+                    seriesData.map(function(e) {
+                        return e.map(function(f) {
                             return [Math.ceil(f.y0), Math.floor(f.y0 - f.size)];
                         });
                     })
@@ -48,7 +52,7 @@ function BarChart(id, data, options) {
             )
         );
         console.log('extent: ' + seriesData.extent);
-    }    
+    }
 
     var h = cfg.h;
     var w = cfg.w;
@@ -66,7 +70,12 @@ function BarChart(id, data, options) {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
+        .tickValues(x.domain().filter(cfg.tickFilter))
         .tickSize(6, 0);
+
+    if (cfg.tickFormat) {
+        xAxis.tickFormat(cfg.tickFormat);
+    }
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -96,8 +105,8 @@ function BarChart(id, data, options) {
                 .attr("height", function(d) { return y(0) - y(d.size); })
                 .attr("width", x.rangeBand())
                 .on("mouseover", function() { if (cfg.tooltips) { tooltip.style("display", null); } })
-            .on("mouseout", function() { 
-                if (cfg.tooltips) { tooltip.style("display", "none") }; 
+            .on("mouseout", function() {
+                if (cfg.tooltips) { tooltip.style("display", "none") };
             })
             .on("mousemove", function(d) {
                 if (cfg.tooltips) {
@@ -124,7 +133,7 @@ function BarChart(id, data, options) {
         var tooltip = svg.append("g")
             .attr("class", "tooltip")
             .style("display", "none");
-            
+
         tooltip.append("rect")
             .attr("width", 40)
             .attr("height", 30)
