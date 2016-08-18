@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<div class=".bar"></div>
+<div id="bar"></div>
 <script src="index.js"></script>
 
 <script type="text/javascript">
@@ -30,7 +30,7 @@
     //             [{x:1,y:4}, {x:2,y:-2}, {x:3,y:-9}],
     //             [{x:1,y:10}, {x:2,y:-3}, {x:3,y:4}]];
 
-    BarChart(".bar", data, { 
+    BarChart("#bar", data, { 
         labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 
         margin: 25, 
         h: 300, 

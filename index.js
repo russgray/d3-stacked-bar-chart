@@ -75,7 +75,7 @@ function BarChart(id, data, options) {
     barStack(data);
     y.domain(data.extent);
 
-    svg = d3.select("body")
+    svg = d3.select(id)
         .append("svg")
         .attr("height", h)
         .attr("width", w);
