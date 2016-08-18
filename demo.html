@@ -6,16 +6,12 @@
 <style>
 .axis text {
   font: 10px sans-serif;
+  color: #FFF;
 }
-.axis path {
+.axis path, .axis line {
   fill: none;
-  stroke: #FFF;
-  stroke-width:4;
+  stroke: #444;
   shape-rendering: crispEdges;
-}
-
-.axis line {
-  display: none;
 }
 </style>
 </head>
@@ -25,11 +21,22 @@
 
 <script type="text/javascript">
     /* Here is an example */
-    var data = [[{x:1,y:3},{x:2,y:6},{x:3,y:-3}],
-                [{x:1,y:4},{x:2,y:-2},{x:3,y:-9}],
-                [{x:1,y:10},{x:2,y:-3},{x:3,y:4}]];
+    var data = [
+                [{x:1,y:13.67}, {x:2,y:6},      {x:3,y:3},  {x:4,y:4},  {x:5,y:7},  {x:6,y:1},  {x:7,y:0}],
+                [{x:1,y:-4.50}, {x:2,y:-20.15}, {x:3,y:-9}, {x:4,y:-3}, {x:5,y:-3}, {x:6,y:-3}, {x:7,y:-1}]
+            ];
 
-    BarChart(".bar", data);
+    // var data = [[{x:1,y:3}, {x:2,y:6}, {x:3,y:-3}],
+    //             [{x:1,y:4}, {x:2,y:-2}, {x:3,y:-9}],
+    //             [{x:1,y:10}, {x:2,y:-3}, {x:3,y:4}]];
+
+    BarChart(".bar", data, { 
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 
+        margin: 25, 
+        h: 300, 
+        w: 700,
+        color: d3.scale.ordinal().range(["#787878","#584069"])
+    });
 
 </script>
 </body>
