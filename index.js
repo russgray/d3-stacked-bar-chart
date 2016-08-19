@@ -51,7 +51,22 @@ function BarChart(id, data, options) {
                 )
             )
         );
-        console.log('extent: ' + seriesData.extent);
+
+        // Tweak the extent to make sure the y axis covers at least
+        // one tick either side of zero
+        var minY = Math.min(seriesData.extent[0], -1);
+        var maxY = Math.max(seriesData.extent[1], 1);
+
+        // Make sure the -ve extent is at least 25% of the +ve extent, and vice versa
+        if (Math.abs(minY) < maxY / 4) {
+            minY = -Math.ceil(maxY / 4);
+        }
+
+        if (maxY < Math.abs(minY) / 4) {
+            maxY = Math.ceil(Math.abs(minY) / 4);
+        }
+
+        seriesData.extent = [minY, maxY];
     }
 
     var h = cfg.h;
@@ -120,7 +135,13 @@ function BarChart(id, data, options) {
     svg.append("g")
         .attr("class", "axis x")
         .attr("transform", "translate(0 " + y(0) + ")")
-        .call(xAxis);
+        .call(xAxis)
+      .selectAll("text")
+        .attr("y", 0)
+        .attr("x", 9)
+        .attr("dy", ".35em")
+        .attr("transform", "rotate(90)")
+        .style("text-anchor", "start");
 
     svg.append("g")
         .attr("class", "axis y")
